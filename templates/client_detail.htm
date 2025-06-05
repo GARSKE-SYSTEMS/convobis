@@ -1,0 +1,91 @@
+<div class="container mt-4">
+    <h1>Client: {[client.name]}</h1>
+    <dl class="row">
+        <dt class="col-sm-2">ID</dt>
+        <dd class="col-sm-10">{[client.id]}</dd>
+
+        <dt class="col-sm-2">Name</dt>
+        <dd class="col-sm-10">{[client.name]}</dd>
+
+        <dt class="col-sm-2">Created</dt>
+        <dd class="col-sm-10">{[client.createdAt]}</dd>
+    </dl>
+
+    <h2>Contacts <a href="index.php?route=clients/contact/new&clientId={[client.id]}" class="btn btn-sm btn-success">Add
+            Contact</a></h2>
+    <ul class="list-group mb-3">
+        <repeat items="client.contacts" var="contact">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {[contact.type]}: {[contact.value]}
+                <form method="post" action="index.php?route=clients/contact/delete" class="mb-0">
+                    <input type="hidden" name="clientId" value="{[client.id]}">
+                    <input type="hidden" name="contactId" value="{[contact.id]}">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </li>
+        </repeat>
+    </ul>
+
+    <h2>Addresses <a href="index.php?route=clients/address/new&clientId={[client.id]}"
+            class="btn btn-sm btn-success">Add Address</a></h2>
+    <ul class="list-group mb-3">
+        <repeat items="client.addresses" var="addr">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {[addr.street]}, {[addr.city]} {[addr.zip]} {[addr.country]}
+                <form method="post" action="index.php?route=clients/address/delete" class="mb-0">
+                    <input type="hidden" name="clientId" value="{[client.id]}">
+                    <input type="hidden" name="addressId" value="{[addr.id]}">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </li>
+        </repeat>
+    </ul>
+
+    <h2>Notes <a href="index.php?route=clients/note/new&clientId={[client.id]}" class="btn btn-sm btn-success">Add
+            Note</a></h2>
+    <ul class="list-group mb-3">
+        <repeat items="client.notes" var="note">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {[note.content]} <small class="text-muted">({[note.createdAt]})</small>
+                <form method="post" action="index.php?route=clients/note/delete" class="mb-0">
+                    <input type="hidden" name="clientId" value="{[client.id]}">
+                    <input type="hidden" name="noteId" value="{[note.id]}">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </li>
+        </repeat>
+    </ul>
+
+    <h2>References <a href="index.php?route=clients/reference/new&clientId={[client.id]}"
+            class="btn btn-sm btn-success">Add Reference</a></h2>
+    <ul class="list-group mb-3">
+        <repeat items="client.references" var="ref">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                {[ref.title]}: <a href="{[ref.url]}" target="_blank">{[ref.url]}</a>
+                <form method="post" action="index.php?route=clients/reference/delete" class="mb-0">
+                    <input type="hidden" name="clientId" value="{[client.id]}">
+                    <input type="hidden" name="referenceId" value="{[ref.id]}">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </li>
+        </repeat>
+    </ul>
+
+    <h2>Tags <a href="index.php?route=clients/tag/new&clientId={[client.id]}" class="btn btn-sm btn-success">Add Tag</a>
+    </h2>
+    <div class="mb-3">
+        <repeat items="client.tags" var="tag">
+            <span class="badge bg-primary me-1">
+                {[tag.name]}
+                <form method="post" action="index.php?route=clients/tag/delete" class="d-inline ms-1">
+                    <input type="hidden" name="clientId" value="{[client.id]}">
+                    <input type="hidden" name="tagId" value="{[tag.id]}">
+                    <button type="submit" class="btn-close btn-close-white btn-sm" aria-label="Remove"></button>
+                </form>
+            </span>
+        </repeat>
+    </div>
+
+    <a href="index.php?route=clients" class="btn btn-secondary">Back to list</a>
+    <a href="index.php?route=clients/edit&id={[client.id]}" class="btn btn-primary">Edit</a>
+</div>

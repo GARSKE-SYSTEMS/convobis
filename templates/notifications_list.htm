@@ -1,0 +1,17 @@
+<!-- filepath: templates/notifications_list.htm -->
+<div class="container mt-4">
+    <h1>Notifications</h1>
+    <ul class="list-group">
+        <repeat items="notifications" var="n">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>{[n.type]}</strong> at {[n.createdAt]}
+                </div>
+                <form method="post" action="index.php?route=notifications/markread" class="mb-0">
+                    <input type="hidden" name="id" value="{[n.id]}">
+                    <button type="submit" class="btn btn-sm btn-secondary">Mark as read</button>
+                </form>
+            </li>
+        </repeat>
+    </ul>
+</div>

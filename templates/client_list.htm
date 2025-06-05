@@ -1,0 +1,29 @@
+<div class="container mt-4">
+    <h1>Clients</h1>
+    <a href="index.php?route=clients/new" class="btn btn-primary mb-3">Add Client</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <repeat items="clients" var="client">
+                <tr>
+                    <td>{[client.id]}</td>
+                    <td><a href="index.php?route=clients/detail&id={[client.id]}">{[client.name]}</a></td>
+                    <td>{[client.createdAt]}</td>
+                    <td>
+                        <a href="index.php?route=clients/edit&id={[client.id]}"
+                            class="btn btn-sm btn-secondary">Edit</a>
+                        <a href="index.php?route=clients/delete&id={[client.id]}"
+                            class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            </repeat>
+        </tbody>
+    </table>
+</div>

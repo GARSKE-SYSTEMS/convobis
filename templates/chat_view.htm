@@ -1,0 +1,34 @@
+<div class="container mt-4">
+    <h1>Topic: {[topic.name]}</h1>
+    <div id="messages" class="mb-4" style="max-height:400px; overflow-y:auto;">
+        <repeat items="messages" var="msg">
+            <div class="border rounded p-2 mb-2{% if msg.replyToId %} ms-4 bg-light{% endif %}">
+                <div class="d-flex justify-content-between">
+                    <small class="text-muted"><strong>{[msg.authorType]}</strong> ({[msg.authorId]})</small>
+                    <small class="text-muted">{[msg.createdAt]}</small>
+                </div>
+                <p class="mb-1">
+                    {[msg.content]}
+                    {% if msg.isPinned %}<span class="badge bg-warning text-dark ms-2">Pinned</span>{% endif %}
+                </p>
+                <div class="d-flex gap-2">
+                    <form method="post" action="index.php?route=topics/reply" class="d-inline">
+                        <input type="hidden" name="topicId" value="{[topic.id]}">
+                        <input type="hidden" name="replyToId" value="{[msg.id]}">
+                        <button type="submit" class="btn btn-sm btn-link">Reply</button>
+                    </form>
+                    <form method="post" action="index.php?route=topics/pin" class="d-inline">
+                        <input type="hidden" name="messageId" value="{[msg.id]}">
+                        <button type="submit" class="btn btn-sm btn-link">{[msg.isPinned ? 'Unpin' : 'Pin']}</button>
+                    </form>
+                </div>
+            </div>
+        </repeat>
+    </div>
+    <form method="post" action="index.php?route=topics/view&topicId={[topic.id]}">
+        <div class="mb-3">
+            <textarea class="form-control" name="content" rows="3" placeholder="Your message..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+</div>

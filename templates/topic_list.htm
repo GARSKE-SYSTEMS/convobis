@@ -1,0 +1,29 @@
+<div class="container mt-4">
+    <h1>Topics for Client {[clientId]}</h1>
+    <a href="index.php?route=topics/new&clientId={[clientId]}" class="btn btn-primary mb-3">New Topic</a>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Archived</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <repeat items="topics" var="t">
+                <tr>
+                    <td>{[t.id]}</td>
+                    <td><a href="index.php?route=topics/view&topicId={[t.id]}">{[t.name]}</a></td>
+                    <td>{[t.createdAt]}</td>
+                    <td>{[t.isArchived] ? 'Yes' : 'No'}</td>
+                    <td>
+                        <a href="index.php?route=topics/archive&topicId={[t.id]}"
+                            class="btn btn-sm btn-warning">Archive</a>
+                    </td>
+                </tr>
+            </repeat>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,81 @@
+<!-- filepath: templates/search_results.htm -->
+<div class="container mt-4">
+    <h1>Search Results for "{[term]}"</h1>
+    <!-- Clients Results -->
+    <h2>Clients</h2>
+    <form method="post" action="index.php?route=search">
+        <input type="hidden" name="type" value="csv">
+        <input type="hidden" name="data" value="{[json_encode(results.clients)]}">
+        <button type="submit" class="btn btn-sm btn-outline-primary">Export Clients CSV</button>
+    </form>
+    <table class="table table-bordered mt-2">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>CreatedAt</th>
+            </tr>
+        </thead>
+        <tbody>
+            <repeat items="results.clients" var="c">
+                <tr>
+                    <td>{[c.id]}</td>
+                    <td>{[c.name]}</td>
+                    <td>{[c.createdAt]}</td>
+                </tr>
+            </repeat>
+        </tbody>
+    </table>
+    <!-- Topics Results -->
+    <h2>Topics</h2>
+    <form method="post" action="index.php?route=search" class="mb-2">
+        <input type="hidden" name="type" value="csv">
+        <input type="hidden" name="data" value="{[json_encode(results.topics)]}">
+        <button type="submit" class="btn btn-sm btn-outline-primary">Export Topics CSV</button>
+    </form>
+    <table class="table table-bordered mb-4">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+            </tr>
+        </thead>
+        <tbody>
+            <repeat items="results.topics" var="t">
+                <tr>
+                    <td>{[t.id]}</td>
+                    <td>{[t.name]}</td>
+                    <td>{[t.description]}</td>
+                    <td>{[t.createdAt]}</td>
+                </tr>
+            </repeat>
+        </tbody>
+    </table>
+    <!-- Messages Results -->
+    <h2>Messages</h2>
+    <form method="post" action="index.php?route=search" class="mb-2">
+        <input type="hidden" name="type" value="csv">
+        <input type="hidden" name="data" value="{[json_encode(results.messages)]}">
+        <button type="submit" class="btn btn-sm btn-outline-primary">Export Messages CSV</button>
+    </form>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Content</th>
+                <th>CreatedAt</th>
+            </tr>
+        </thead>
+        <tbody>
+            <repeat items="results.messages" var="m">
+                <tr>
+                    <td>{[m.id]}</td>
+                    <td>{[m.content]}</td>
+                    <td>{[m.createdAt]}</td>
+                </tr>
+            </repeat>
+        </tbody>
+    </table>
+</div>

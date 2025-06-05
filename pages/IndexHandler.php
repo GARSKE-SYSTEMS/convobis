@@ -15,7 +15,9 @@ use VeloFrame as WF;
 class IndexHandler extends WF\DefaultPageController {
 
     public function handleGet(array $params): string {
-        try{
+        // require login
+        \Convobis\Util\AuthHelper::requireAuth();
+        try {
             $index_tpl = new WF\Template("index");
         } catch (Exception $e) {
             return "ERROR! File could not be loaded.";

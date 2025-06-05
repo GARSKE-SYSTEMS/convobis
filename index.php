@@ -1,4 +1,9 @@
 <?php
+
+require_once __DIR__ . '/util/EventDispatcher.php';
+require_once __DIR__ . '/service/NotificationService.php';
+
+
 /**
  * index.php
  * 
@@ -12,6 +17,11 @@
 include_once("VeloFrame/autoload.php");
 
 use VeloFrame as WF;
+use Convobis\Util\EventDispatcher;
+use Convobis\Service\NotificationService;
+
+// Subscribe notification handler to new messages
+EventDispatcher::subscribe('message.created', [new NotificationService(), 'onMessageCreated']);
 
 $server = new WF\Server();
 $server->setRoutingHandler(new WF\RoutingHandler());
